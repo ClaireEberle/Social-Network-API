@@ -7,12 +7,18 @@ const thoughtSchema = new Schema(
             required:true,
             len: [1,280]
         },
+        createdAt:{
+            type: Date,
+            default: Date.now
+        },
         username: {
             type: String,
             required:true,
         }
-        reactions: {
-            ['']
-        }
+        // reactions: {
+        //     ['']
+        // }
     }
-)
+);
+
+module.exports = thoughtSchema
