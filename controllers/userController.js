@@ -21,7 +21,7 @@ module.exports = {
     //create a user
     createUser(req,res){
         User.create(req.body)
-        .then((course) => res.json(course))
+        .then((user) => res.json(user))
         .catch((err) => {
             console.log(err);
             return res.status(500).json(err);
