@@ -47,5 +47,28 @@ module.exports = {
         !user
         ? res.status(404).json({ message: 'No user with that ID'})
         : User.deleteMany({ _id: req.params.userId}))
+    },
+
+    addFriend(req,res){
+        User.findOneAndUpdate({ _id: req.params.userId}, {$addToSet: {friends: req.body}})
+        .then((user) => 
+        !user
+        ? res.status(404).json({ message: 'No user with that ID'})
+        : res.json(user))
+        .catch((err) => res.status(500).json(err))
+    },
+
+    removeFriend(req,res){
+        User.findOneAndUpdate(
+          { _id: req.params.thoughtId },
+          { $pull: {friends: {friendId: req.params.friendId}}} 
+          
+          .then((user) => 
+        !user
+        ? res.status(404).json({ message: 'No user with that ID'})
+        : res.json(user))
+        .catch((err) => res.status(500).json(err))
+        )
+        
     }
 }

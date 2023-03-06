@@ -44,7 +44,7 @@ module.exports = {
     //update a user
     updateThought(req,res){
         Thought.findOneAndUpdate(
-            {_id: req.params.userId},
+            {_id: req.params.thoughtId},
             { $set: req.body },
         
         )
@@ -67,14 +67,14 @@ module.exports = {
 // /api/thoughts/:thoughtId/reactions
 addReaction(req,res) {
 Thought.findOneAndUpdate(
-    { _id: req.params.applicationId },
+    { _id: req.params.thoughtId },
     { $addToSet: {reactions: req.body } }
 
 )
 .then((thought) =>
 !thought
 ? res.status(404).json({ message: 'No thought with this id!' })
-: res.json(application)
+: res.json(thought)
 )
 .catch((err) => res.status(500).json(err));
 },
